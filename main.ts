@@ -14,6 +14,12 @@ import { join } from "node:path";
 
 const COUNT = "137";
 
+// The gate only accepts 1–5 characters of digits, so refuse to write
+// anything else rather than submit an invalid entry.
+if (!/^\d{1,5}$/.test(COUNT)) {
+  throw new Error(`tab count ${JSON.stringify(COUNT)} is not 1-5 digits`);
+}
+
 const outDir = process.env.OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
 
